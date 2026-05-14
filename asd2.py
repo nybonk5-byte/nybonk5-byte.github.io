@@ -1,0 +1,1 @@
+print(float(input("値段は？"))*1.1)
