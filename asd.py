@@ -1,6 +1,8 @@
-x=0
-def green():
-    x=float(input("値段は？"))
-    x=x*1.1
-    return x
-print(green())
+def green(x):
+    return round(float(x))*1.1
+while True:
+    x=(input("値段は？"))
+    if x=="終了":
+         break
+    print(green(x))
+        
