@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+
+<html lang="ja">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <title>akiso</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap" rel="stylesheet">
+
+    <style>
+
+        body {
+
+            font-family: "Noto Sans JP", sans-serif;
+
+            background-color: rgb(255, 255, 255);
+            background-size: cover;
+
+            margin: 0;
+        }
+        body.dark{
+            background-color: black;
+            color:white;
+        }
+        body.dark p{
+            color: white;
+        }
+        body.dark .toc-container li{
+            color: #eeeeee;
+        }
+        body.dark .tool-tag{
+            color: #f8f8f8;
+        }
+        .button1{
+            height: 40px;
+            display: flex;
+        }
+        .bode {
+            text-align: center;
+        }
+        #typing{
+            color:#f8f8f8;
+            font-size: 32px;
+        }
+        header {
+            background-color: rgb(0, 0, 0);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 10px 0;
+        }
+        body.dark header{
+            background-color: #f8f8f8;
+        }
+        body.dark #typing{
+            color: #000000;
+        }
+        header img {
+            width: 40px;
+            height: 40px;
+        }
+
+        hr {
+
+            height: 1px;
+
+            background-color: #a1c9da;
+            margin: 20px 0;
+            size: 100px;
+        }
+
+        h1 {
+
+            font-size: 60px;
+            margin: 40px;
+            margin: -56px 0;
+        }
+
+        .so1 {
+
+            text-align: left;
+
+            line-height: 1.8;
+
+            font-size: 18px;
+
+            max-width: 800px;
+
+            margin: 0 auto;
+
+            padding: 0 20px;
+        }
+        .so1 p{
+            margin:-1px 0;         /* <p>タグ自体の上下の余白を消す */
+            padding: 0;        /* 念のため内側の余白も0に */
+            line-height: 1.2;
+        }
+        .iij {
+            text-align: left;
+            margin:40px auto;
+            max-width: 800px;
+
+        }
+        .akiso{
+            display: flex;
+            margin: 90px;
+        }
+        .p2{
+            text-align: left;
+            margin:40px auto;
+            max-width: 800px;
+            line-height: 1.8;
+            font-size:18px ;
+        }
+        .p2 p{
+            margin: 0;         /* <p>タグ自体の上下の余白を消す */
+            padding: 0;        /* 念のため内側の余白も0に */
+            line-height: 1.2;
+        }
+        .toc-container {
+    max-width: 250px;
+    margin: 40px 0 40px 20px; /* 上・右・下・左 の順。左に20px空ける */
+    text-align: left;
+    position: absolute;
+}
+
+.toc-title {
+    font-weight: bold;
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+}
+
+.toc-list {
+    list-style: none; /* ポッチを消す */
+    padding: 0;
+    border-left: 2px solid #eeeeee; /* 薄い縦線 */
+}
+
+.toc-list li {
+    padding: 8px 20px;
+    font-size: 14px;
+    color: #555;
+    border-left: 2px solid transparent; /* 透明な線を準備 */
+    margin-left: -2px; /* 親の線と重ねる */
+    cursor: pointer;
+}
+
+/* active（現在地）の時だけ線を黒く太くする */
+.toc-list li.active {
+    border-left: 2px solid #000;
+    font-weight: bold;
+    color: #000;
+}
+.p3{
+    text-align: left;
+    margin:40px auto;
+    max-width: 800px;
+}
+p{
+    font-size: 18px;
+    color: #474748;
+}
+li{
+    font-size: 17px;
+    color: #474748;
+}
+/* ========== カルーセル ========== */
+.carousel-wrapper {
+    max-width: 860px;
+    margin: 40px auto;
+    position: relative;
+}
+.carousel-track-container {
+    overflow-x: scroll;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+}
+.carousel-track {
+    display: flex;
+    transition: transform 0.4s ease;
+}
+.carousel-slide {
+    min-width: 100%;
+    box-sizing: border-box;
+    scroll-snap-align: start;
+}
+.carousel-slide img {
+    width: 100%;
+    height: 420px;
+    object-fit: cover;
+    display: block;
+}
+.tool-list {
+    display: flex;
+    gap: 3px;
+    margin-top: 20px;
+}
+.tool-tag {
+    font-size: 14px;
+    border: 1px solid #aaa;
+    padding: 4px 14px;
+    border-radius: 999px;
+    color: #242426;
+}
+#toggle-btn{
+    border: none;
+    outline: none;
+    background-color: aqua;
+}
+.logo{
+    filter:brightness(999);
+}
+.toc-list a{
+    text-decoration: none;
+    color: inherit;
+}
+footer{
+    background-color: rgb(38, 211, 191) !important;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 30px;
+}
+.footer1 p{
+     color: #f8f8f8;
+     margin: 0%;
+}
+.footer1{
+    display: flex;
+    gap: 50px;
+    justify-content: center;
+}
+    </style>
+
+</head>
+
+<body>
+
+    <div class="bode">
+
+        <header>
+
+            <img src="{{ url_for('static', filename='astro-icon-dark.png') }}" alt="ロゴ" class="logo">
+            <span id="typing"></span>
+        </header>
+    <div class="toc-container">
+        <p class="toc-title">目次</p>
+    <ul class="toc-list">
+        <li class="active"><a href="#intro">自己紹介</a></li>
+        <li><a href="#work">今まで作ったもの</a></li>
+        <li></li>
+        <li></li>
+    </ul>
+</div>
+<div class="button1"><button id="toggle-btn">🌙 ダークモード</button></div>
+    <section class="so1" id="intro">
+
+        <h2>1.自己紹介</h2>
+
+        <p>どうもこんにちは、です</p>
+
+        <p>電子機械工学科(H)の二年生です。</p>
+
+        <p>ゲームを作っててたまにCAD作ってます。部活の電子計算組織研究会(EDPS)に所属してます。</p>
+
+        <p>ゲームが趣味でホラゲーとアクション、FPSが主でたまにナラティブ系(映画みたいに進んで分岐を自分で選ぶジャンル)もやってます</p>
+    </section>
+<div class="p3">
+    <h2>2.使っているツール</h2>
+    <hr>
+<div class="tool-list">
+    <span class="tool-tag">Fusion 360</span>
+    <span class="tool-tag">Unity</span>
+    <span class="tool-tag">HTML / CSS</span>
+    <span class="tool-tag">Javascript</span>
+</div>
+</div>
+<div class="iij" id="work">
+    <h2>3.今まで作ったもの</h2>
+    <hr>
+</div>
+<div class="carousel-wrapper">
+    <div class="carousel-track-container">
+        <div class="carousel-track">
+           <div class="carousel-slide"><img src="{{ url_for('static', filename='sakuhin.png') }}" alt="脱出ホラーゲーム"></div>
+<div class="carousel-slide"><img src="{{ url_for('static', filename='sakuhingazou.png') }}" alt="耐久ゲーム"></div>
+<div class="carousel-slide"><img src="{{ url_for('static', filename='aagun.png') }}" alt="Fusion360 銃モデル"></div>
+<div class="carousel-slide"><img src="{{ url_for('static', filename='blackjack.png') }}" alt="ブラックジャック"></div>
+<div class="carousel-slide"><img src="{{ url_for('static', filename='asd.py.png') }}" alt="消費税コード" style="width:300px; height:420px; object-fit:cover; display:block;"></div>
+        </div>
+    </div>
+</div>
+</section>
+<div class="p2">
+    <p>左から脱出ホラーゲームで鍵ヒントを解いて鍵を入手して扉を開けるというもので次に<a href="https://dic.pixiv.net/a/five_nights_at_freddy%27s">fnaf</a>みたいな電気残量みて耐えるというもので三つ目はcadで作った銃です,四つ目は製作中のブラックジャックで2dにも触れたくて作りはじめました</p>
+    <button onclick=changetext()>変わるぞ</button>
+</div>
+<p id="message">まだ押してない</p>
+</div>
+<footer>
+    <div class="footer1">
+        <p>@eh25</p>
+        <a href="https://github.com/nybonk5-byte/Mk2">自分のgithub</a>
+    </div>
+</footer>
+<script>
+const btn = document.getElementById('toggle-btn');
+
+btn.addEventListener('click', () => {
+  document.body.classList.toggle('dark');
+
+  const isDark = document.body.classList.contains('dark');
+  btn.textContent = isDark ? '☀️ ライトモード' : '🌙 ダークモード';
+});
+const text = 'calfolnia girls';
+let m = 0;
+
+function type() {
+  document.getElementById('typing').textContent += text[m];
+  m++
+  if(m<text.length){setTimeout(type, 100);}
+}
+type();
+function changetext(){
+    document.getElementById("message").textContent="変わった";
+}
+</script>
+</body>
+</html>
